@@ -12,32 +12,30 @@
             max-height: 80vh;
             margin-top: 20px;
         }
+        select {
+            font-size: 16px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
     <h1>Branding Display</h1>
-    <img id="displayImage" src="" alt="Branding Image">
+
+    <label for="imageSelect">Select Image:</label>
+    <select id="imageSelect" onchange="changeImage()">
+        <option value="https://i.ibb.co/5hRfLrW8/Studio-1a.png">Tridwr FM</option>
+        <option value="https://i.ibb.co/99NnRm1t/2.png">On Air</option>
+        <option value="https://i.ibb.co/gZmNdzvW/3.png">Off Air</option>
+    </select>
+
+    <img id="displayImage" src="https://i.ibb.co/5hRfLrW8/Studio-1a.png" alt="Branding Image">
 
     <script>
-        function loadImage() {
-            // Construct the API endpoint to fetch image_url.txt
-            const apiUrl = 'https://raw.githubusercontent.com/solomonsweb/brandingremote/main/image_url.txt';
-
-            // Make the API request to fetch the file
-            fetch(apiUrl)
-                .then(response => response.text())
-                .then(data => {
-                    // Update the image source with the URL from the file
-                    document.getElementById('displayImage').src = data.trim();
-                })
-                .catch(error => console.error('Error fetching image URL:', error));
+        function changeImage() {
+            var selectBox = document.getElementById("imageSelect");
+            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+            document.getElementById("displayImage").src = selectedValue;
         }
-
-        // Load the image every 5 seconds (adjust as needed)
-        setInterval(loadImage, 5000);
-
-        // Load the image when the page loads
-        loadImage();
     </script>
 </body>
 </html>
